@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         backgroundColor: Colors.blue,
       ),
       body: ListView(
@@ -26,9 +26,11 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.notifications,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NotificationsSettingsPage()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationsSettingsPage(),
+                    ),
+                  );
                 },
               ),
               SettingsTile(
@@ -37,9 +39,11 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.person,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileSettingsPage()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileSettingsPage(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -55,9 +59,11 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.phone,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EmergencyContactsPage()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EmergencyContactsPage(),
+                    ),
+                  );
                 },
               ),
               SettingsTile(
@@ -66,9 +72,11 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.warning,
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AlertSensitivityPage()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AlertSensitivityPage(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -83,7 +91,7 @@ class SettingsPage extends StatelessWidget {
                 subtitle: "Sign out of your account",
                 icon: Icons.exit_to_app,
                 onTap: () {
-                  // Logout action
+                  _showLogoutDialog(context);
                 },
               ),
             ],
@@ -92,14 +100,43 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  // Function to show logout confirmation dialog
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Sign Out"),
+          content: const Text("Are you sure you want to sign out?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                // Add logout functionality here (e.g., navigate to login screen)
+              },
+              child:
+                  const Text("Sign Out", style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
+// Section for grouping settings options
 class SettingsSection extends StatelessWidget {
   final String title;
   final List<Widget> tiles;
 
-  // ignore: use_key_in_widget_constructors
-  const SettingsSection({required this.title, required this.tiles});
+  const SettingsSection({super.key, required this.title, required this.tiles});
 
   @override
   Widget build(BuildContext context) {
@@ -108,28 +145,32 @@ class SettingsSection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
         ...tiles,
-        Divider(),
+        const Divider(),
       ],
     );
   }
 }
 
+// Tile for individual settings option
 class SettingsTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
   final VoidCallback onTap;
 
-  const SettingsTile(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.icon,
-      required this.onTap});
+  const SettingsTile({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +178,7 @@ class SettingsTile extends StatelessWidget {
       leading: Icon(icon, color: Colors.blue),
       title: Text(title),
       subtitle: Text(subtitle),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
     );
   }
