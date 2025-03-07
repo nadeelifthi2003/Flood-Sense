@@ -1,4 +1,4 @@
-import 'package:floodsense/screens/settings_page.dart';
+
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'alert/flood.dart';
@@ -18,7 +18,7 @@ class FloodSenseApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false, // Disable debug banner
-      home: SettingsPage(), // Directly show the Settings Page
+      home: FloodAlertScreen(), // Directly show the Settings Page
     );
   }
 }
