@@ -63,7 +63,11 @@ class _FloodAlertScreenState extends State<FloodAlertScreen> {
                 children: [
                   const Text(
                     "Flood Alert",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF1044AB)), // Changed color here
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1044AB),
+                    ),
                   ),
                   const SizedBox(height: 25),
                   CircleAvatar(
@@ -96,15 +100,33 @@ class _FloodAlertScreenState extends State<FloodAlertScreen> {
                 children: [
                   const Text(
                     "pH Level",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF1044AB)), // Changed color here
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1044AB),
+                    ),
                   ),
                   const SizedBox(height: 15),
                   const Text("Click below to calculate pH", style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 15),
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.blue,
-                    child: const Text("Go", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add your functionality here
+                      print("Go button pressed");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(24),
+                    ),
+                    child: const Text(
+                      "Go",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -115,17 +137,26 @@ class _FloodAlertScreenState extends State<FloodAlertScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () => updateStatus("Safe"),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  ),
                   child: const Text("Safe", style: TextStyle(fontSize: 16)),
                 ),
                 ElevatedButton(
                   onPressed: () => updateStatus("Caution"),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.yellow, padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.yellow,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  ),
                   child: const Text("Caution", style: TextStyle(fontSize: 16)),
                 ),
                 ElevatedButton(
                   onPressed: () => updateStatus("Danger"),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  ),
                   child: const Text("Danger", style: TextStyle(fontSize: 16)),
                 ),
               ],
@@ -133,7 +164,6 @@ class _FloodAlertScreenState extends State<FloodAlertScreen> {
           ],
         ),
       ),
-      
     );
   }
 }
