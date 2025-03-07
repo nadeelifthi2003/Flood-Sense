@@ -1,4 +1,4 @@
-import 'package:floodsense/screens/settings_page.dart';
+import 'package:floodsense/soil/soil.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class FloodSenseApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false, // Disable debug banner
-      home: SettingsPage(), // Directly show the Settings Page
+      home: SoilMoistureScreen(), // Directly show the Settings Page
     );
   }
 }
