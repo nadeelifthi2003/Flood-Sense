@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         backgroundColor: Colors.blue,
       ),
       body: ListView(
@@ -83,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                 subtitle: "Sign out of your account",
                 icon: Icons.exit_to_app,
                 onTap: () {
-                  // Logout action
+                  _showLogoutDialog(context); // ✅ Show Logout Confirmation
                 },
               ),
             ],
@@ -92,14 +92,48 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  // ✅ Logout Confirmation Dialog
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Logout"),
+          content: const Text("Are you sure you want to log out?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close dialog
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close dialog
+                _performLogout(context); // ✅ Perform logout
+              },
+              child: const Text("Logout", style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // ✅ Perform Logout Action
+  void _performLogout(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Logged out successfully")),
+    );
+  }
 }
 
 class SettingsSection extends StatelessWidget {
   final String title;
   final List<Widget> tiles;
 
-  // ignore: use_key_in_widget_constructors
-  const SettingsSection({required this.title, required this.tiles});
+  const SettingsSection({super.key, required this.title, required this.tiles});
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +143,11 @@ class SettingsSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         ),
         ...tiles,
-        Divider(),
+        const Divider(),
       ],
     );
   }
@@ -137,7 +172,7 @@ class SettingsTile extends StatelessWidget {
       leading: Icon(icon, color: Colors.blue),
       title: Text(title),
       subtitle: Text(subtitle),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
     );
   }
