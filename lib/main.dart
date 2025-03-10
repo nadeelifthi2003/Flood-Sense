@@ -1,8 +1,8 @@
-import 'package:floodsense/water%20level%20app/water%20level.dart';
 import 'package:flutter/material.dart';
+import 'sensors/water_level.dart'; // Corrected Import
 
 void main() {
-  runApp(FloodSenseApp());
+  runApp(const FloodSenseApp());
 }
 
 class FloodSenseApp extends StatelessWidget {
@@ -17,7 +17,7 @@ class FloodSenseApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false, // Disable debug banner
-      home: WaterLevelScreen(), // Directly show the Settings Page
+      home: WaterLevelScreen(), // Directly show the Water Level Page
     );
   }
 }
