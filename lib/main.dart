@@ -1,23 +1,56 @@
-import 'package:floodsense/water%20level%20app/water%20level.dart';
 import 'package:flutter/material.dart';
+import 'package:floodsense/screens/settings_page.dart';
+import 'package:floodsense/sensors/water_level.dart';
 
 void main() {
-  runApp(FloodSenseApp());
+  runApp(const FloodSenseApp());
 }
 
-class FloodSenseApp extends StatelessWidget {
+class FloodSenseApp extends StatefulWidget {
   const FloodSenseApp({super.key});
+
+  @override
+  State<FloodSenseApp> createState() => _FloodSenseAppState();
+}
+
+class _FloodSenseAppState extends State<FloodSenseApp> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    WaterLevelScreen(),
+    SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'FloodSense',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      debugShowCheckedModeBanner: false, // Disable debug banner
-      home: WaterLevelScreen(), // Directly show the Settings Page
+      home: Scaffold(
+        body: _pages[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.water_drop),
+              label: 'Sensor Data',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
