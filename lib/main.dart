@@ -1,6 +1,3 @@
-
-import 'package:floodsense/screens/settings_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:floodsense/screens/settings_page.dart';
 import 'package:floodsense/sensors/water_level.dart';
@@ -33,7 +30,6 @@ class _FloodSenseAppState extends State<FloodSenseApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-
       home: Scaffold(
         body: _pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -55,7 +51,6 @@ class _FloodSenseAppState extends State<FloodSenseApp> {
           ],
         ),
       ),
-
     );
   }
 }
